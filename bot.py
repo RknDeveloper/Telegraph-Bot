@@ -7,7 +7,7 @@ from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
 from config import Config
 from aiohttp import web
-from plugins.web_support import web_server
+from Rkn_TelegraphBot.web_support import web_server
 
 
 # Get logging configurations
