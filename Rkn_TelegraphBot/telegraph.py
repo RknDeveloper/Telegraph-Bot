@@ -54,7 +54,7 @@ async def getmedia(bot, update):
         reply_markup=reply_markup)
     except Exception as error:
         await message.edit_text(
-            text=text=f"Error :- <code>{error}</code>",
+            text=f"Error :- <code>{error}</code>",
             disable_web_page_preview=True,
             reply_markup=reply_markup=InlineKeyboardMarkup(
             [[
