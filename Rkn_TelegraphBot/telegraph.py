@@ -56,7 +56,7 @@ async def getmedia(bot, update):
         await message.edit_text(
             text=f"Error :- <code>{error}</code>",
             disable_web_page_preview=True,
-            reply_markup=reply_markup=InlineKeyboardMarkup(
+            reply_markup=InlineKeyboardMarkup(
             [[
             InlineKeyboardButton('More Help', callback_data='help')
             ]]))
