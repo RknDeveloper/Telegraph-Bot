@@ -18,6 +18,9 @@ class Config(object):
     FORCE_SUB   = os.environ.get("FORCE_SUB", "RknDeveloper")
     LOG_CHANNEL = int(os.environ.get('LOG_CHANNEL', '-1001944995812'))
 
+    # download file
+    DOWNLOAD_LOCATION = os.environ.get("DOWNLOAD_LOCATION", "./DOWNLOADS/")
+
     # wes response configuration
     WEBHOOK = bool(os.environ.get("WEBHOOK", True))
     PORT = int(os.environ.get("PORT", "8080"))
