@@ -8,54 +8,59 @@ from config import Config
 
 @Rkn_TelegraphBot.on_message(filters.media & filters.private)
 async def getmedia(bot, update):
-    file = getattr(update, update.media.value)
-    if file.file_size > 5 * 1024 * 1024:
-         return await update.reply_text("sᴏʀʀʏ ᴅᴜᴅᴇ, ᴛʜɪs ʙᴏᴛ ᴅᴏᴇsɴ'ᴛ sᴜᴘᴘᴏʀᴛ ғɪʟᴇs ʟᴀʀɢᴇʀ ᴛʜᴀɴ 𝟻 ᴍʙ+")
-    medianame = Config.DOWNLOAD_LOCATION + str(update.from_user.id)
     try:
-        message = await update.reply(
+        file = getattr(update, update.media.value)
+        if file.file_size > 5 * 1024 * 1024:
+             return await update.reply_text("sᴏʀʀʏ ᴅᴜᴅᴇ, ᴛʜɪs ʙᴏᴛ ᴅᴏᴇsɴ'ᴛ sᴜᴘᴘᴏʀᴛ ғɪʟᴇs ʟᴀʀɢᴇʀ ᴛʜᴀɴ 𝟻 ᴍʙ+")
+        medianame = Config.DOWNLOAD_LOCATION + str(update.from_user.id)
+        try:
+            message = await update.reply(
             text="`Processing...`",
             quote=True,
             disable_web_page_preview=True
         )
-        await bot.download_media(
+            await bot.download_media(
             message=update,
             file_name=medianame
         )
-        response = upload_file(medianame)
-        try:
-            os.remove(medianame)
-        except:
-            pass
-    except Exception as error:
-        print(error)
-        text=f"Error :- <code>{error}</code>"
-        reply_markup=InlineKeyboardMarkup(
+            response = upload_file(medianame)
+            try:
+                os.remove(medianame)
+            except:
+                pass
+        except Exception as error:
+            print(error)
+            text=f"Error :- <code>{error}</code>"
+            reply_markup=InlineKeyboardMarkup(
             [[
             InlineKeyboardButton('More Help', callback_data='help')
-            ]]
-        )
-        await message.edit_text(
+            ]])
+            await message.edit_text(
             text=text,
             disable_web_page_preview=True,
-            reply_markup=reply_markup
-        )
-        return
-    text=f"**Link :-** `https://graph.org{response[0]}`\n\n**𝑱𝒐𝒊𝒏 ⚡ :-** @RknDeveloper"
-    reply_markup=InlineKeyboardMarkup(
+            reply_markup=reply_markup)
+            return
+        text=f"**Link :-** `https://graph.org{response[0]}`\n\n**𝑱𝒐𝒊𝒏 ⚡ :-** @RknDeveloper"
+        reply_markup=InlineKeyboardMarkup(
         [[
         InlineKeyboardButton(text="Open Link", url=f"https://graph.org{response[0]}"),
         InlineKeyboardButton(text="Share Link", url=f"https://telegram.me/share/url?url=https://graph.org{response[0]}")
         ],[
         InlineKeyboardButton(text="Join Updates Channel", url="https://telegram.me/RknDeveloper")
-        ]]
-    )
-    await message.edit_text(
+        ]])   
+        await message.edit_text(
         text=text,
         disable_web_page_preview=False,
-        reply_markup=reply_markup
-    )
-
+        reply_markup=reply_markup)
+    except Exception as error:
+        await message.edit_text(
+            text=text=f"Error :- <code>{error}</code>",
+            disable_web_page_preview=True,
+            reply_markup=reply_markup=InlineKeyboardMarkup(
+            [[
+            InlineKeyboardButton('More Help', callback_data='help')
+            ]]))
+        
 @Rkn_TelegraphBot.on_message(filters.text & filters.private)
 async def text_handler(bot, update):
     """Creating instant view link
