@@ -6,6 +6,7 @@ Pillow
 aiohttp
 pytz
 requests
-telegraph
+#telegraph
+git+https://github.com/RknDeveloper/telegraph-latest
 psutil
 python-dotenv
